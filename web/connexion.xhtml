@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html style="width: 100%; height: 100%;"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body style="width: 100%; height: 100%;">
+        <b:container style="position: absolute; top: 25%; left:33%; width:33%;" >
+             <b:form horizontal="true">
+                
+                <h1 style="text-align: center"><span style="color:black;">Paris </span><span style="color: green;">Sportif</span></h1>
+                    
+                <b:inputText value="#{adminConnexion.login}" placeholder="Nom de compte" tiny-screen="full-width" />
+                <b:inputText value="#{adminConnexion.mdp}" placeholder="Mot de passe" type="password" tiny-screen="full-width" />
+                    <b:row>
+                        <b:column col-md="5">
+                            <b:commandButton value="Créer un compte" look="primary" style="width:100%"  />
+                        </b:column>
+                        <b:column offset-md="2" col-md="5">
+                            <b:commandButton value="Connexion" look="success" style="width:100%" action="#{adminConnexion.tryConnect()}" />
+                        </b:column>
+                    </b:row>
+                    <p:messages id="messages" showDetail="true" closable="true">
+                        <p:autoUpdate />
+                    </p:messages>
+              </b:form>
+        </b:container>
+    </h:body>
+</html>
+
