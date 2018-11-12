@@ -37,34 +37,8 @@
                     </h:form>
                 </b:column>
                 <b:column col-md="10">
-                    <h1 style="text-align: center">Les rencontres à venir !</h1>
-                    <p:dataTable id="rencontres" var="lig" value="#{rencontreBean.rencontresNonTermines}" 
-                                 style="width:100%; text-align: center">
-                        <p:column headerText="Date de rencontre">
-                            <h:outputText value="#{lig.dateR}" />
-                        </p:column>
-
-                        <p:column headerText="Équipe visiteur">
-                            <h:outputText value="#{lig.idVisiteur.nomE}" />
-                        </p:column>
-
-                        <p:column headerText="Équipe locale">
-                            <h:outputText value="#{lig.idLocal.nomE}" />
-                        </p:column>
-
-                        <p:column headerText="Cote victoire locale" >
-                            <h:outputText value="#{lig.coteL}"/>
-                        </p:column>
-
-                        <p:column headerText="Cote victoire visiteur">
-                            <h:outputText value="#{lig.coteV}"/>
-                        </p:column>
-
-                        <p:column headerText="Cote match nulle">
-                            <h:outputText value="#{lig.coteD}"/>
-                        </p:column>
-
-                    </p:dataTable>
+                    <h1 style="text-align: center">Les rencontres admin !</h1>
+                    
                 </b:column>
             </b:row>
         </b:container>              

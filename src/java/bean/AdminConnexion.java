@@ -81,7 +81,11 @@ private boolean connecte;
         } else {
             if (utilisateur.getMdp().equals(sMdp)){
                 connecte = true;
-                return "index.xhtml";
+                if (utilisateur.getAdmin()==1){
+                    return "admin.xhtml";
+                } else {
+                    return "index.xhtml";
+                }
             } else {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
                     "Erreur !", "Mot de passe ou nom de compte faux"));
