@@ -16,26 +16,27 @@
     </h:head>
     <h:body style="background-color: #EEEEEE; height: 100%; height: 100%">
         <ui:include src="menuBar.xhtml"/>
-        <!-- Barre latérale -->
-        <h:form style="position: fixed; top: 15%; left:1%;">
-                <p:menu>
-                    <p:submenu label="Ajax">
-                        <p:menuitem value="Save" actionListener="#{menuView.save}" icon="ui-icon-disk" />
-                        <p:menuitem value="Update" actionListener="#{menuView.update}" icon="ui-icon-arrowrefresh-1-w"/>
-                    </p:submenu>
-                    <p:submenu label="Non-Ajax">
-                        <p:menuitem value="Delete" actionListener="#{menuView.delete}" ajax="false" icon="ui-icon-close"/>
-                    </p:submenu>
-                    <p:submenu label="Navigations">
-                        <p:menuitem value="External" url="http://www.primefaces.org" icon="ui-icon-home"/>
-                        <p:menuitem value="Internal" icon="ui-icon-star"/>
-                    </p:submenu>
-                </p:menu>
-        </h:form>
-        <!-- Barre latérale -->
-        <b:container style="padding-top: 1%; background-color: white; height: 100%">
+         <b:container fluid="true" style="padding-top: 1%; background-color: white; height: 100%">
+            <!-- Barre latérale -->
             <b:row>
-                <b:column col-md="12">
+                <b:column col-md="2">
+                    <h:form style="position: fixed; top: 15%; left:1%;">
+                            <p:menu>
+                                <p:submenu label="Ajax">
+                                    <p:menuitem value="Save" actionListener="#{menuView.save}" icon="ui-icon-disk" />
+                                    <p:menuitem value="Update" actionListener="#{menuView.update}" icon="ui-icon-arrowrefresh-1-w"/>
+                                </p:submenu>
+                                <p:submenu label="Non-Ajax">
+                                    <p:menuitem value="Delete" actionListener="#{menuView.delete}" ajax="false" icon="ui-icon-close"/>
+                                </p:submenu>
+                                <p:submenu label="Navigations">
+                                    <p:menuitem value="External" url="http://www.primefaces.org" icon="ui-icon-home"/>
+                                    <p:menuitem value="Internal" icon="ui-icon-star"/>
+                                </p:submenu>
+                            </p:menu>
+                    </h:form>
+                </b:column>
+                <b:column col-md="10">
                     <h1 style="text-align: center">Les rencontres à venir !</h1>
                     <p:dataTable id="rencontres" var="lig" value="#{rencontreBean.rencontresNonTermines}" 
                                  style="width:100%; text-align: center">
@@ -50,24 +51,23 @@
                         <p:column headerText="Équipe locale">
                             <h:outputText value="#{lig.idLocal.nomE}" />
                         </p:column>
-                        
+
                         <p:column headerText="Cote victoire locale" >
                             <h:outputText value="#{lig.coteL}"/>
                         </p:column>
-                        
+
                         <p:column headerText="Cote victoire visiteur">
                             <h:outputText value="#{lig.coteV}"/>
                         </p:column>
-                        
+
                         <p:column headerText="Cote match nulle">
                             <h:outputText value="#{lig.coteD}"/>
                         </p:column>
- 
+
                     </p:dataTable>
                 </b:column>
             </b:row>
-        </b:container>
-                    
+        </b:container>              
     </h:body>   
 </html>
 

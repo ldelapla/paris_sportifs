@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        Hello #{adminBean.user}
+        <h:link value="accueil.xhtml" outcome="accueil"/> 
+        <h:form id="addEquipe">
+            
+            <p:dataTable id="table" var="lig" value="#{adminBean.equipes}" style="width:30%">
+                <p:column headerText="idE">
+                    <h:outputText value="#{lig.idE}" />
+                </p:column>
+
+                <p:column headerText="nom équipe">
+                    <h:outputText value="#{lig.nomE}" />
+                </p:column>
+
+                <p:column headerText="nomSport">
+                    <h:outputText value="#{lig.idS.nomSport}" />
+                </p:column>
+            </p:dataTable>
+            <!-- Choisir le sport avec selectonemenu -->
+            
+            <h:panelGrid id="grid" columns="3" cellpadding="5">
+                <p:outputLabel for="sportMenu" value="Votre sport : " />
+                <p:selectOneMenu id="sportMenu" value="#{adminBean.idSSaisie}">
+                    <f:selectItems var="sport" value="#{adminBean.sports}" itemLabel="#{sport.nomSport}" itemValue="#{sport.idS}"  />
+                </p:selectOneMenu>
+
+                <br />
+
+                <p:outputLabel for="nomEquipe" value="nom de l'équipe : " />
+                <p:inputText id="nomEquipe" value="#{adminBean.saisieEquipe.nomE}"/>
+
+                <br />
+
+                <p:commandButton value="valider" actionListener="#{adminBean.createEquipe()}" update="table"/>
+                
+            </h:panelGrid>
+            <br /> 
+            
+            <!-- toto -->
+            
+            
+
+            <br />
+                
+            
+                
+        </h:form>
+        
+        <h:form>
+            
+            <p:dataList id="listSport" value="#{adminBean.sports}" var="sport" style="width:30%">
+                #{sport.nomSport}
+            </p:dataList>
+            
+             <h:panelGrid id="myGrid" columns="3" cellpadding="5">
+           
+                <p:outputLabel for="nomSport" value="nom du sport : " />
+                <p:inputText id="nomSport" value="#{adminBean.saisieSport.nomSport}"/>
+
+                <p:commandButton value="valider" actionListener="#{adminBean.createSport()}" update="listSport"/>
+             </h:panelGrid>
+        </h:form>
+        
+        <p:dataTable id="tableR" var="rencontre" value="#{adminBean.rencontres}" style="width:80%">
+            <p:column headerText="Date rencontre">
+                <h:outputText value="#{rencontre.dateR}">
+                    <f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
+                </h:outputText>
+            </p:column>
+
+            <p:column headerText="Match terminé">
+                <h:outputText value="#{rencontre.termine}"/>
+            </p:column>
+
+            <p:column headerText="Cote victoire visiteur">
+                <h:outputText value="#{rencontre.coteV}" />
+            </p:column>
+
+            <p:column headerText="Cote victoire Local">
+                <h:outputText value="#{rencontre.coteL}" />
+            </p:column>
+
+            <p:column headerText="Cote match null">
+                <h:outputText value="#{rencontre.coteD}" />
+            </p:column>
+
+            <p:column headerText="Visiteur">
+                <h:outputText value="#{rencontre.idVisiteur.nomE}" />
+            </p:column>
+
+            <p:column headerText="Local">
+                <h:outputText value="#{rencontre.idLocal.nomE}" />
+            </p:column>
+        </p:dataTable>
+           
+        <br />
+        
+        <h:form>            
+                <p:inputText id="nomSport" value="#{adminBean.saisieSport.nomSport}"/>
+
+                <p:commandButton value="Supprimer" actionListener="#{adminBean.removeSport()}" ajax="false"/>
+        </h:form>
+        
+        Coucou petite peruche
+        
+
+    </h:body>
+</html>
+
