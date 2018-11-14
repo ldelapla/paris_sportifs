@@ -95,4 +95,15 @@ private boolean connecte;
         }
     }
     
+    public void deconnexion (){
+        this.utilisateur= null;
+        this.connecte= false;
+        this.sLogin=null;
+        this.sMdp=null;
+    }
+    
+    public float getArgent (){
+        return utilisateur.getSolde();
+    }
+    
 }
