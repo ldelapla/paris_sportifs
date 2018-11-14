@@ -44,6 +44,7 @@ public class AdminBean implements Serializable {
     private Equipe saisieEquipe;
     private Sport saisieSport;
     private int idSSaisie;
+    private int idESaisie;
     private Rencontre saisieRencontre;
 
     /**
@@ -61,6 +62,14 @@ public class AdminBean implements Serializable {
 
     public void setIdSSaisie(int idSSaisie) {
         this.idSSaisie = idSSaisie;
+    }
+
+    public int getIdESaisie() {
+        return idESaisie;
+    }
+
+    public void setIdESaisie(int idESaisie) {
+        this.idESaisie = idESaisie;
     }
     
     public Equipe getSaisieEquipe() {
