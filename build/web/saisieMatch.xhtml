@@ -29,16 +29,52 @@
                             </p:menu>
                     </h:form>
                 </b:column>
+                <h:panelGrid id="grid" columns="2">
                 <b:column col-md="10">
                     <h1 style="text-align: center">Saisie d'un match</h1>
-                    <h:panelGrid id="grid" columns="3" cellpadding="5">
-                    <p:outputLabel for="sportMenu" value="Votre sport : " />
-                    <p:selectOneMenu id="sportMenu" value="#{adminBean.idSSaisie}">
-                        <f:selectItems var="sport" value="#{adminBean.sports}" itemLabel="#{sport.nomSport}" itemValue="#{sport.idS}"  />
-                    </p:selectOneMenu>
-                    </h:panelGrid>
-                    
+                    <b:row> 
+                        <b:column col-md="12">
+                        <!--Choix du sport-->    
+                        <p:outputLabel for="sportMenu" value="Votre sport : " />
+                        <p:selectOneMenu id="sportMenu" value="#{adminBean.idSSaisie}">
+                            <f:selectItems var="sport" value="#{adminBean.sports}" itemLabel="#{sport.nomSport}" itemValue="#{sport.idS}"  />
+                        </p:selectOneMenu>
+                        </b:column>
+                    </b:row>
+                    <b:row>
+                        <b:column col-md="4">              
+                        <!--Choix Equipe 1-->   
+                        <p:outputLabel for="eq1" value="Equipe 1 : " />
+                        <p:selectOneMenu id="eq1" value="#{adminBean.idESaisie}">
+                            <f:selectItems var="equipe" value="#{adminBean.equipes}" itemLabel="#{equipe.nomE}" itemValue="#{equipe.idE}"  />
+                        </p:selectOneMenu>
+                        </b:column>
+                        
+                        <b:column col-md="4">
+                        <p:outputLabel value="Nul " />
+                        </b:column>
+                        
+                        <b:column col-md="4">
+                        <!--Choix Equipe 2-->
+                        <p:outputLabel for="eq2" value="Equipe 2 : " />
+                        <p:selectOneMenu id="eq2" value="#{adminBean.idESaisie}">
+                            <f:selectItems var="equipe" value="#{adminBean.equipes}" itemLabel="#{equipe.nomE}" itemValue="#{equipe.idE}"  />
+                        </p:selectOneMenu>
+                        </b:column>
+                    </b:row>
+                    <b:row>  
+                        <b:column col-md="4">
+                        <b:inputText value="#{rencontreBean.coteV}" />
+                        </b:column>
+                        <b:column col-md="4">
+                        <b:inputText value="#{rencontreBean.coteD}" />
+                        </b:column>
+                        <b:column col-md="4">
+                        <b:inputText value="#{rencontreBean.coteL}" />
+                        </b:column>
+                    </b:row>
                 </b:column>
+                </h:panelGrid>
             </b:row>
         </b:container>              
     </h:body>   
