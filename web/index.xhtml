@@ -15,10 +15,11 @@
         
     </h:head>
     <h:body style="height: 100%; height: 100%">
+        <h:form>
         <b:container fluid="true">
             <b:row>
                 <b:column col-md="12">
-                    <b:image value="resources/baniere.jpg" style="width:100%"/>
+                    <b:image value="resources/baniere_reduite.jpg" style="width:100%"/>
                 </b:column>
             </b:row>
             <b:row>
@@ -29,10 +30,9 @@
         </b:container>
         
         <b:container fluid="false" style="padding-top: 1%; height: 100%">
-            <b:form>
             <!-- Barre latérale -->
             
-            <p:menu style="position: fixed; top: 15%; left:1%;" rendered="#{adminConnexion.connecte}">
+            <p:menu style="position: fixed; top: 30%; left:1%;" rendered="#{adminConnexion.connecte}">
                         <p:submenu label="Sport" >
                             <p:menuitem value="Tous" actionListener="#{rencontreBean.setSelective(false)}" ajax="false" />
                             <p:menuitem value="Foot" actionListener="#{rencontreBean.setSportSelectedFoot()}" ajax="false"/>
@@ -121,9 +121,8 @@
                     
                 </b:column>
             </b:row>
-                    </b:form>
         </b:container>    
-
+        </h:form>
     </h:body>   
 </html>
 
