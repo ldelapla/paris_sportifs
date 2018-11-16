@@ -8,14 +8,13 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       style="height: 100%; width: 100%;">
     <h:head>
-        <title>Facelet Title</title>
-        <h:outputStylesheet name="./css/default.css"/>
-        <h:outputStylesheet name="./css/cssLayout.css"/>
-        
-        
+        <title>Page de saisie d'un nouveau match</title>
+            
     </h:head>
     <h:body style="background-color: #EEEEEE; height: 100%; height: 100%">
-        <ui:include src="menuBar.xhtml"/>
+        <h:form>
+            <ui:include src="menuBar.xhtml"/>    
+        </h:form>
          <b:container fluid="true" style="padding-top: 1%; background-color: white; height: 100%">
             <!-- Barre latérale -->
             <b:row>
@@ -23,68 +22,141 @@
                     <h:form style="position: fixed; top: 15%; left:1%;">
                             <p:menu>
                                 <p:menuitem value="Compte" actionListener="#{menuView.save}" icon="ui-icon-home" />
+                            <p:submenu label="Gestion des Matchs">
                                 <p:menuitem value="Ajouter match" outcome="saisieMatch.xhtml" icon="ui-icon-plus"/>
                                 <p:menuitem value="Valider match" outcome="validerMatch.xhtml" icon="ui-icon-check"/>
-                                <p:menuitem value="Historique" outcome="paris.xhtml" icon=" ui-icon-folder-collapsed"/>
+                            </p:submenu>
+                            <p:submenu label="Gestion de l'historique">    
+                                <p:menuitem value="Matchs en cours" outcome="paris.xhtml" icon=" ui-icon-folder-collapsed"/>
+                                <p:menuitem value="Matchs terminés" outcome="paris.xhtml" icon=" ui-icon-folder-collapsed"/>
+                            </p:submenu>
                             </p:menu>
                     </h:form>
                 </b:column>
                 <b:column col-md="10">
-                    <h1 style="text-align: center">Saisie d'un match</h1>
-                    <b:row> 
-                        <b:column col-md="12">
-                        <!--Choix du sport-->    
-                        <p:outputLabel for="sportMenu" value="Votre sport : " />
-                        <p:selectOneMenu id="sportMenu" value="#{adminBean.idSSaisie}">
-                            <f:selectItems var="sport" value="#{adminBean.sports}" itemLabel="#{sport.nomSport}" itemValue="#{sport.idS}"  />
-                        </p:selectOneMenu>
-                        </b:column>
-                    </b:row><br />
-                    <b:row style="text-align: center">
-                        <b:column col-md="4">              
-                        <!--Choix Equipe 1-->   
-                        <p:outputLabel for="eq1" value="Equipe 1 " />
-                        </b:column>
-                        
-                        <b:column col-md="4">
-                        <p:outputLabel value="Nul " />
-                        </b:column>
-                        
-                        <b:column col-md="4">
-                        <!--Choix Equipe 2-->
-                        <p:outputLabel for="eq2" value="Equipe 2 " />
-                        </b:column>
-                    </b:row>
+                    <h1 id="titre" style="text-align: center">Saisie d'un match </h1>    
+                    <b:well>
+                        <h:form>
+                            <p:growl id="growl" showDetail="true" sticky="true" />
+                            <p:fieldset legend="Football" toggleable="true" style="text-align:center;">
                         <b:row style="text-align: center">
-                            <b:column col-md="4">              
+                            <b:column col-md="3">              
                             <!--Choix Equipe 1-->   
-                            <p:selectOneMenu id="eq1" value="#{adminBean.idESaisie}">
-                                <f:selectItems var="equipe" value="#{adminBean.equipes}" itemLabel="#{equipe.nomE}" itemValue="#{equipe.idE}"  />
-                            </p:selectOneMenu>
+                            <p:outputLabel value="Equipe 1 " />
                             </b:column>
 
-                            <b:column col-md="4">
+                            <b:column col-md="3">
+                            <p:outputLabel value="Nul " />
                             </b:column>
 
-                            <b:column col-md="4">
+                            <b:column col-md="3">
                             <!--Choix Equipe 2-->
-                            <p:selectOneMenu id="eq2" value="#{adminBean.idESaisie}">
-                                <f:selectItems var="equipe" value="#{adminBean.equipes}" itemLabel="#{equipe.nomE}" itemValue="#{equipe.idE}"  />
-                            </p:selectOneMenu>
+                            <p:outputLabel value="Equipe 2 " />
                             </b:column>
-                        </b:row><br />                
-                    <b:row>  
-                        <b:column col-md="4">
-                        <b:inputText value="#{rencontreBean.coteV}" />
-                        </b:column>
-                        <b:column col-md="4">
-                        <b:inputText value="#{rencontreBean.coteD}" />
-                        </b:column>
-                        <b:column col-md="4">
-                        <b:inputText value="#{rencontreBean.coteL}" />
-                        </b:column>
-                    </b:row>
-                    <p:commandButton value="valider" actionListener="#{adminBean.createSport()}" update=""/>
+                            <b:column col-md="3">
+                            <p:outputLabel for="datetime" value="Date et heure du match" />
+                            </b:column>                            
+                        </b:row>
+                            <b:row style="text-align: center">
+                                <b:column col-md="3">              
+                                <!--Choix Equipe 1-->                              
+                                <p:selectOneMenu id="eq1F" value="#{adminBean.idESaisie}">
+                                    <f:selectItems var="equipe" value="#{adminBean.equipesFoot}" itemLabel="#{equipe.nomE}" itemValue="#{equipe.idE}"  />
+                                </p:selectOneMenu>
+                                </b:column>
+
+                                <b:column col-md="3">
+                                </b:column>
+
+                                <b:column col-md="3">
+                                <!--Choix Equipe 2-->
+                                 <p:selectOneMenu id="eq2F" value="#{adminBean.idESaisie2}">
+                                    <f:selectItems var="equipe" value="#{adminBean.equipesFoot}" itemLabel="#{equipe.nomE}" itemValue="#{equipe.idE}"  />
+                                </p:selectOneMenu>
+                                </b:column>
+                            </b:row><br />                
+                        <b:row>  
+                            <b:column col-md="3">
+                            <b:inputText value="#{adminBean.saisieRencontre.coteV}" />
+                            </b:column>
+                            <b:column col-md="3">
+                            <b:inputText value="#{adminBean.saisieRencontre.coteD}" />
+                            </b:column>
+                            <b:column col-md="3">
+                            <b:inputText value="#{adminBean.saisieRencontre.coteL}" />
+                            </b:column>
+                            <b:column col-md="3">
+                                <p:calendar id="datetime" value="#{adminBean.dateRencontre}" pattern="MM/dd/yyyy HH:mm:ss" />
+                            </b:column>                            
+                        </b:row>
+                        <b:row style="text-align: center">  
+                            <p:commandButton value="valider" action="#{adminBean.createRencontre()}" update="@form"/>
+                        </b:row>
+                        </p:fieldset>    
+                        </h:form>
+                    </b:well>
+                    <b:well>
+                        <h:form>
+                        <p:growl id="growl" showDetail="true" sticky="true" />
+                        <p:fieldset legend="Rugby" toggleable="true" style="text-align:center;">    
+                        <b:row style="text-align: center">
+                            <b:column col-md="3">              
+                            <!--Choix Equipe 1-->   
+                            <p:outputLabel value="Equipe 1 " />
+                            </b:column>
+
+                            <b:column col-md="3">
+                            <p:outputLabel value="Nul " />
+                            </b:column>
+
+                            <b:column col-md="3">
+                            <!--Choix Equipe 2-->
+                            <p:outputLabel value="Equipe 2 " />
+                            </b:column>
+                            
+                            <b:column col-md="3">
+                            <p:outputLabel for="datetime" value="Date et heure du match" />
+                            </b:column>
+                        </b:row>
+                            <b:row style="text-align: center">
+                                <b:column col-md="3">              
+                                <!--Choix Equipe 1-->   
+                                <p:selectOneMenu id="eq1R" value="#{adminBean.idESaisie}">
+                                    <f:selectItems var="equipeR" value="#{adminBean.equipesRugby}" itemLabel="#{equipeR.nomE}" itemValue="#{equipeR.idE}" />
+                                </p:selectOneMenu>                             
+                                </b:column>
+
+                                <b:column col-md="3">
+                                </b:column>
+
+                                <b:column col-md="3">
+                                <!--Choix Equipe 2-->
+                                <p:selectOneMenu id="eq2R" value="#{adminBean.idESaisie2}">
+                                    <f:selectItems var="equipeR" value="#{adminBean.equipesRugby}" itemLabel="#{equipeR.nomE}" itemValue="#{equipeR.idE}" />
+                                </p:selectOneMenu>
+                                </b:column>
+                                
+                            </b:row><br />                
+                        <b:row>  
+                            <b:column col-md="3">
+                            <b:inputText value="#{adminBean.saisieRencontre.coteV}" />
+                            </b:column>
+                            <b:column col-md="3">
+                            <b:inputText value="#{adminBean.saisieRencontre.coteD}" />
+                            </b:column>
+                            <b:column col-md="3">
+                            <b:inputText value="#{adminBean.saisieRencontre.coteL}" />
+                            </b:column>
+                            <b:column col-md="3">
+                                <p:calendar id="datetime" value="#{adminBean.dateRencontre}" pattern="MM/dd/yyyy HH:mm:ss" />
+                            </b:column>
+                        </b:row>
+                        <b:row style="text-align: center">  
+                            <p:commandButton value="valider" action="#{adminBean.createRencontre()}" update="@form"/>
+                        </b:row>
+                        </p:fieldset>
+                        </h:form>
+                    </b:well>                    
                 </b:column>
             </b:row>
         </b:container>              

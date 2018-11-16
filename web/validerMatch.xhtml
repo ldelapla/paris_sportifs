@@ -8,64 +8,61 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       style="height: 100%; width: 100%;">
     <h:head>
-        <title>Facelet Title</title>
-        <h:outputStylesheet name="./css/default.css"/>
-        <h:outputStylesheet name="./css/cssLayout.css"/>
-        
+        <title>Page de validation d'un nouveau match</title>
         
     </h:head>
     <h:body style="background-color: #EEEEEE; height: 100%; height: 100%">
-        <ui:include src="menuBar.xhtml"/>
+        <h:form>
+            <ui:include src="menuBar.xhtml"/>    
+        </h:form>
          <b:container fluid="true" style="padding-top: 1%; background-color: white; height: 100%">
             <!-- Barre latérale -->
             <b:row>
                 <b:column col-md="2">
                     <h:form style="position: fixed; top: 15%; left:1%;">
                             <p:menu>
-                                <p:submenu label="Ajax">
-                                    <p:menuitem value="Save" actionListener="#{menuView.save}" icon="ui-icon-disk" />
-                                    <p:menuitem value="Update" actionListener="#{menuView.update}" icon="ui-icon-arrowrefresh-1-w"/>
-                                </p:submenu>
-                                <p:submenu label="Non-Ajax">
-                                    <p:menuitem value="Delete" actionListener="#{menuView.delete}" ajax="false" icon="ui-icon-close"/>
-                                </p:submenu>
-                                <p:submenu label="Navigations">
-                                    <p:menuitem value="External" url="http://www.primefaces.org" icon="ui-icon-home"/>
-                                    <p:menuitem value="Internal" icon="ui-icon-star"/>
-                                </p:submenu>
+                                <p:menuitem value="Compte" actionListener="#{menuView.save}" icon="ui-icon-home" />
+                            <p:submenu label="Gestion des Matchs">
+                                <p:menuitem value="Ajouter match" outcome="saisieMatch.xhtml" icon="ui-icon-plus"/>
+                                <p:menuitem value="Valider match" outcome="validerMatch.xhtml" icon="ui-icon-check"/>
+                                <p:menuitem value="Supprimer match" outcome="validerMatch.xhtml" icon="ui-icon-minus"/>
+                            </p:submenu>
+                            <p:submenu label="Gestion de l'historique">    
+                                <p:menuitem value="Matchs en cours" outcome="paris.xhtml" icon=" ui-icon-folder-collapsed"/>
+                                <p:menuitem value="Matchs terminés" outcome="paris.xhtml" icon=" ui-icon-folder-collapsed"/>
+                            </p:submenu>
                             </p:menu>
                     </h:form>
                 </b:column>
+                <h:form>                
                 <b:column col-md="10">
-                    <h1 style="text-align: center">Les rencontres à venir !</h1>
-                    <p:dataTable id="rencontres" var="lig" value="#{rencontreBean.rencontresNonTermines}" 
-                                 style="width:100%; text-align: center">
-                        <p:column headerText="Date de rencontre">
-                            <h:outputText value="#{lig.dateR}" />
-                        </p:column>
+                    <h1 style="text-align: center">Validation d'un match</h1>
+                    <b:well>
+                        <b:row>
+                            <b:column col-md="12">
+                                <p:dataTable id="rencontres" var="lig" value="#{rencontreBean.rencontresNonTermines}" 
+                                             style="width:100%; text-align: center">
+                                    <p:column headerText="Date de rencontre">
+                                        <h:outputText value="#{lig.dateR}" />
+                                    </p:column>
 
-                        <p:column headerText="Équipe visiteur">
-                            <h:outputText value="#{lig.idVisiteur.nomE}" />
-                        </p:column>
+                                    <p:column headerText="Équipe visiteur">
+                                        <h:outputText value="#{lig.idVisiteur.nomE}" />
+                                    </p:column>
 
-                        <p:column headerText="Équipe locale">
-                            <h:outputText value="#{lig.idLocal.nomE}" />
-                        </p:column>
+                                    <p:column headerText="Équipe locale">
+                                        <h:outputText value="#{lig.idLocal.nomE}" />
+                                    </p:column>
 
-                        <p:column headerText="Cote victoire locale" >
-                            <h:outputText value="#{lig.coteL}"/>
-                        </p:column>
-
-                        <p:column headerText="Cote victoire visiteur">
-                            <h:outputText value="#{lig.coteV}"/>
-                        </p:column>
-
-                        <p:column headerText="Cote match nulle">
-                            <h:outputText value="#{lig.coteD}"/>
-                        </p:column>
-
-                    </p:dataTable>
+                                    <p:column headerText="Sélection">
+                                        <p:commandButton value="valider le match" action="#{adminBean.changeStatut(lig.idR)}" update="rencontres"/>
+                                    </p:column>
+                                </p:dataTable>
+                            </b:column>
+                        </b:row>    
+                    </b:well>
                 </b:column>
+                </h:form>    
             </b:row>
         </b:container>              
     </h:body>   

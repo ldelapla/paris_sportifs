@@ -33,7 +33,6 @@ public class RencontreBean implements Serializable {
     
     private boolean selective;
     private Sport sportSelected;
-    private int coteV, coteD, coteL;
 
     /**
      * Creates a new instance of AccueilBean
@@ -70,30 +69,6 @@ public class RencontreBean implements Serializable {
     
     public List<Rencontre> getRencontres(){
         return daoRencontre.findAll();
-    }
-
-    public int getCoteV() {
-        return coteV;
-    }
-
-    public void setCoteV(int coteV) {
-        this.coteV = coteV;
-    }
-
-    public int getCoteD() {
-        return coteD;
-    }
-
-    public void setCoteD(int coteD) {
-        this.coteD = coteD;
-    }
-
-    public int getCoteL() {
-        return coteL;
-    }
-
-    public void setCoteL(int coteL) {
-        this.coteL = coteL;
     }
     
     public List<Rencontre> getRencontresNonTermines(){
