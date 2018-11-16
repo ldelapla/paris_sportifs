@@ -134,6 +134,10 @@ public class Utilisateur implements Serializable {
     public void setSolde(float solde) {
         this.solde = solde;
     }
+    
+    public void paieSolde (float paiement){
+        this.solde -= paiement;
+    }
 
     @XmlTransient
     public Collection<Paris> getParisCollection() {
