@@ -14,22 +14,31 @@
 
     <h:body>
 
-        <div id="top">
-            <ui:insert name="top">
-                <b:navBar brand-img="resources/paris_sportif.png" brandImgStyle="height:100%" fluid="true" brand-href="index.xhtml">
-                <b:navbarLinks pull="right">
-                    <b:navLink value="Connexion" outcome="connexion.xhtml" rendered="#{!adminConnexion.connecte}" icon-awesome="fa-user"/>
-                    <p:outputLabel class="nav navbar-text" value="#{adminConnexion.utilisateur.prenom}" rendered="#{adminConnexion.connecte}"/>
-                    <h:commandButton style="margin:15px; border: 0px; background-color: #f8f8f8; color: #777" class="nav" value="Deconnexion"
-                                     actionListener="#{adminConnexion.deconnexion()}" action="index.xhtml"
-                                     onmouseover="this.style.color= #333"
-                                     rendered="#{adminConnexion.connecte}"/>
-                    <p:outputLabel class="nav navbar-text" value="Solde : #{adminConnexion.argent} €" rendered="#{adminConnexion.connecte}"/>
-                    <b:navLink value="Panier" outcome="panier.xhtml" rendered="#{adminConnexion.connecte}" icon-awesome="fa-basket"/>
-                </b:navbarLinks>
-              </b:navBar>
-            </ui:insert>
-        </div>
+        <ui:insert name="top">
+            <b:container fluid="true">
+                <b:row>
+                    <b:column col-md="12">
+                        <b:image value="resources/baniere_reduite_2.jpg" style="width:100%"/>
+                    </b:column>
+                </b:row>
+                <b:row>
+                    <b:column col-md="12">
+                        <b:navBar brand-img="resources/paris_sportif.png" brandImgStyle="height:100%" fluid="true" brand-href="index.xhtml">
+                        <b:navbarLinks pull="right">
+                            <b:navLink value="Connexion" outcome="connexion.xhtml" rendered="#{!adminConnexion.connecte}" icon-awesome="fa-user"/>
+                            <p:outputLabel class="nav navbar-text" value="#{adminConnexion.utilisateur.prenom}" rendered="#{adminConnexion.connecte}"/>
+                            <h:commandButton style="margin:15px; border: 0px; background-color: #f8f8f8; color: #777" class="nav" value="Deconnexion"
+                                             actionListener="#{adminConnexion.deconnexion()}" action="index.xhtml"
+                                             onmouseover="this.style.color= #333"
+                                             rendered="#{adminConnexion.connecte}"/>
+                            <p:outputLabel class="nav navbar-text" value="Solde : #{adminConnexion.argent} €" rendered="#{adminConnexion.connecte}"/>
+                            <b:navLink value="Panier" outcome="panier.xhtml" rendered="#{adminConnexion.connecte}" icon-awesome="fa-basket"/>
+                        </b:navbarLinks>
+                      </b:navBar>
+                    </b:column>
+                </b:row>
+            </b:container>
+        </ui:insert>
 
     </h:body>
 

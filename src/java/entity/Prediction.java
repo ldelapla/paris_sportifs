@@ -84,6 +84,44 @@ public class Prediction implements Serializable {
     public void setRencontre(Rencontre rencontre) {
         this.rencontre = rencontre;
     }
+    
+    public String getImageNum (){
+        return Integer.toString(this.rencontre.getIdVisiteur().getIdS().getIdS());
+    }
+    
+    public String getPronostique (){
+        String prono;
+        switch (choix) {
+        case 'v':  prono = "Victoire " + rencontre.getIdVisiteur().getNomE();
+                 break;
+        case 'd':  prono = "Match nul";
+                 break;
+        case 'l':  prono = "Victoire " + rencontre.getIdLocal().getNomE();
+                 break;
+        default :  prono = "Erreur";
+                 break;
+        }
+        return prono;
+    }
+    
+    public String getRencontreDescription(){
+            return rencontre.getIdLocal().getNomE() + " VS " + rencontre.getIdVisiteur().getNomE();
+    }
+    
+    public String coteSelectionnee (){
+        String message;
+        switch (choix) {
+        case 'v':  message = Float.toString(rencontre.getCoteV());
+                 break;
+        case 'd':  message = Float.toString(rencontre.getCoteD());
+                 break;
+        case 'l':  message = Float.toString(rencontre.getCoteL());
+                 break;
+        default :  message = Float.toString(0);
+                 break;
+        }
+        return message;
+    }
 
     @Override
     public int hashCode() {

@@ -9,120 +9,138 @@
       style="height: 100%; width: 100%;">
     <h:head>
         <title>Facelet Title</title>
-        <h:outputStylesheet name="./css/default.css"/>
-        <h:outputStylesheet name="./css/cssLayout.css"/>
         
         
     </h:head>
     <h:body style="height: 100%; height: 100%">
         <h:form>
-        <b:container fluid="true">
-            <b:row>
-                <b:column col-md="12">
-                    <b:image value="resources/baniere_reduite.jpg" style="width:100%"/>
-                </b:column>
-            </b:row>
-            <b:row>
-                <b:column col-md="12">
-                    <ui:include src="menuBar.xhtml"/>
-                </b:column>
-            </b:row>
-        </b:container>
-        
-        <b:container fluid="false" style="padding-top: 1%; height: 100%">
-            <!-- Barre latérale -->
+             
             
-            <p:menu style="position: fixed; top: 30%; left:1%;" rendered="#{adminConnexion.connecte}">
-                        <p:submenu label="Sport" >
-                            <p:menuitem value="Tous" actionListener="#{rencontreBean.setSelective(false)}" ajax="false" />
-                            <p:menuitem value="Foot" actionListener="#{rencontreBean.setSportSelectedFoot()}" ajax="false"/>
-                            <p:menuitem value="Rugby" actionListener="#{rencontreBean.setSportSelectedRugby()}" ajax="false"/>
-                        </p:submenu>
-                        <p:submenu label="Historique">
-                            <p:menuitem value="Mes paris" outcome="paris.xhtml"/>
-                        </p:submenu>
-            </p:menu>
+            <ui:include src="menuBar.xhtml"/>
+
+            <b:container fluid="true" style="padding-top: 1%; height: 100%">
+                <!-- Barre latérale -->
+
+                <b:row>
+                    <b:column col-md="2">
+                        <p:menu rendered="#{adminConnexion.connecte}">
+                                <p:submenu label="Sport" >
+                                    <p:menuitem value="Tous" actionListener="#{rencontreBean.setSelective(false)}" ajax="false" />
+                                    <p:menuitem value="Foot" actionListener="#{rencontreBean.setSportSelectedFoot()}" ajax="false"/>
+                                    <p:menuitem value="Rugby" actionListener="#{rencontreBean.setSportSelectedRugby()}" ajax="false"/>
+                                </p:submenu>
+                                <p:submenu label="Historique">
+                                    <p:menuitem value="Mes paris" outcome="paris.xhtml"/>
+                                </p:submenu>
+                        </p:menu>
+                    </b:column>
+                    <b:column col-md="8">
+                        <b:row>
+                            <b:column col-md="12">
+                                <b:well>
+                                    <h1 style="text-align: center;">Les rencontres à venir</h1>
+                                </b:well>
+                            </b:column>
+                        </b:row>
+                        <b:row>
+                            <b:column col-md="12">
+                                
+                                
+                                
+                                <p:dataTable id="rencontres" var="lig" value="#{rencontreBean.rencontresNonTermines}" 
+                                     style="width:100%; text-align: center"
+                                     rendered="#{!adminConnexion.connecte}">
+                                    <p:column headerText="Date de rencontre">
+                                        <h:outputText value="#{lig.dateR}" >
+                                            <f:convertDateTime locale="fr" pattern="dd/MM/yy hh:mm" timeZone="fr" />
+                                        </h:outputText>
+                                    </p:column>
+
+                                    <p:column headerText="Équipe visiteur">
+                                        <h:outputText value="#{lig.idVisiteur.nomE}" />
+                                    </p:column>
+                                    
+                                    <p:column headerText="Cote victoire visiteur">
+                                        <h:outputText value="#{lig.coteV}"/>
+                                    </p:column>
+                                    
+                                    <p:column headerText="Cote match nulle">
+                                        <h:outputText value="#{lig.coteD}"/>
+                                    </p:column>
+
+                                    <p:column headerText="Cote victoire locale" >
+                                        <h:outputText value="#{lig.coteL}"/>
+                                    </p:column>
+
+                                    <p:column headerText="Équipe locale">
+                                        <h:outputText value="#{lig.idLocal.nomE}" />
+                                    </p:column>
+
+                                </p:dataTable>
+
+
+                                <p:dataTable id="rencontresSelective" var="lig" value="#{rencontreBean.wantedRencontre}" 
+                                             style="width:100%; text-align: center"
+                                             rendered="#{adminConnexion.connecte}">
+                                    <p:column headerText="Date de rencontre">
+                                        <h:outputText value="#{lig.dateR}" >
+                                            <f:convertDateTime locale="fr" pattern="dd/MM/yy hh:mm" timeZone="fr" />
+                                        </h:outputText>
+                                    </p:column>
+
+                                    <p:column headerText="Équipe visiteur">
+                                        <h:outputText value="#{lig.idVisiteur.nomE}" />
+                                    </p:column>
+                                    
+                                    <p:column headerText="Cote victoire visiteur">
+                                        <h:outputText value="#{lig.coteV}"/>
+                                        <br/>
+                                        <p:commandButton icon="ui-icon-cart"
+                                                         action="#{panier.ajouteRencontre(lig.idR, 'v')}"
+                                                         update="@form"/>
+                                    </p:column>
+                                    
+                                    <p:column headerText="Cote match nulle">
+                                        <h:outputText value="#{lig.coteD}"/>
+                                        <br/>
+                                        <p:commandButton icon="ui-icon-cart"
+                                                         action="#{panier.ajouteRencontre(lig.idR, 'd')}"
+                                                         update="@form"/>
+                                    </p:column>
+
+                                    <p:column headerText="Cote victoire locale" >
+                                        <h:outputText value="#{lig.coteL}"/>
+                                        <br/>
+                                        <p:commandButton icon="ui-icon-cart"
+                                                         action="#{panier.ajouteRencontre(lig.idR, 'l')}"
+                                                         update="@form"/>
+                                    </p:column>
+
+                                    <p:column headerText="Équipe locale">
+                                        <h:outputText value="#{lig.idLocal.nomE}" />
+                                    </p:column>
+
+                                </p:dataTable>
+                            </b:column>
+                        </b:row>
+
+                    </b:column>
+                </b:row>
+                <b:row>
+                    <b:column col-md="4" offset-md="4">
+                        <p:messages id="messages" showDetail="true" closable="true">
+                            <p:autoUpdate />
+                        </p:messages>
+                    </b:column>
+                </b:row>
+            </b:container>    
             
-            <b:row>
-                <b:column col-md="12">
-                    <b:row>
-                        <b:column col-md="12">
-                            <b:well>
-                                <h1 style="text-align: center;">Les rencontres à venir</h1>
-                            </b:well>
-                        </b:column>
-                    </b:row>
-                    <b:row>
-                        <b:column col-md="12">
-                            <p:dataTable id="rencontres" var="lig" value="#{rencontreBean.rencontresNonTermines}" 
-                                 style="width:100%; text-align: center"
-                                 rendered="#{!adminConnexion.connecte}">
-                                <p:column headerText="Date de rencontre">
-                                    <h:outputText value="#{lig.dateR}" >
-                                        <f:convertDateTime locale="fr" pattern="dd/MM/yy hh:mm" timeZone="fr" />
-                                    </h:outputText>
-                                </p:column>
-
-                                <p:column headerText="Équipe visiteur">
-                                    <h:outputText value="#{lig.idVisiteur.nomE}" />
-                                </p:column>
-
-                                <p:column headerText="Équipe locale">
-                                    <h:outputText value="#{lig.idLocal.nomE}" />
-                                </p:column>
-
-                                <p:column headerText="Cote victoire locale" >
-                                    <h:outputText value="#{lig.coteL}"/>
-                                </p:column>
-
-                                <p:column headerText="Cote victoire visiteur">
-                                    <h:outputText value="#{lig.coteV}"/>
-                                </p:column>
-
-                                <p:column headerText="Cote match nulle">
-                                    <h:outputText value="#{lig.coteD}"/>
-                                </p:column>
-
-                            </p:dataTable>
-
-
-                            <p:dataTable id="rencontresSelective" var="lig" value="#{rencontreBean.wantedRencontre}" 
-                                         style="width:100%; text-align: center"
-                                         rendered="#{adminConnexion.connecte}">
-                                <p:column headerText="Date de rencontre">
-                                    <h:outputText value="#{lig.dateR}" >
-                                        <f:convertDateTime locale="fr" pattern="dd/MM/yy hh:mm" timeZone="fr" />
-                                    </h:outputText>
-                                </p:column>
-
-                                <p:column headerText="Équipe visiteur">
-                                    <h:outputText value="#{lig.idVisiteur.nomE}" />
-                                </p:column>
-
-                                <p:column headerText="Équipe locale">
-                                    <h:outputText value="#{lig.idLocal.nomE}" />
-                                </p:column>
-
-                                <p:column headerText="Cote victoire locale" >
-                                    <h:outputText value="#{lig.coteL}"/>
-                                </p:column>
-
-                                <p:column headerText="Cote victoire visiteur">
-                                    <h:outputText value="#{lig.coteV}"/>
-                                </p:column>
-
-                                <p:column headerText="Cote match nulle">
-                                    <h:outputText value="#{lig.coteD}"/>
-                                </p:column>
-
-                            </p:dataTable>
-                        </b:column>
-                    </b:row>
-                    
-                </b:column>
-            </b:row>
-        </b:container>    
+            
+            
         </h:form>
+        
+        <ui:include src="footer.xhtml"/>
+        
     </h:body>   
 </html>
 
