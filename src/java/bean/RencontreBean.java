@@ -25,7 +25,7 @@ import javax.ejb.EJB;
  */
 @Named(value = "rencontreBean")
 @SessionScoped
-public class RencontreBean implements Serializable {
+    public class RencontreBean implements Serializable {
     @EJB
     RencontreFacadeLocal daoRencontre;
     @EJB

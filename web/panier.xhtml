@@ -9,65 +9,78 @@
       style="height: 100%; width: 100%;">
     <h:head>
         <title>Facelet Title</title>
-        <h:outputStylesheet name="./css/default.css"/>
-        <h:outputStylesheet name="./css/cssLayout.css"/>
         
         
     </h:head>
     <h:body style="background-color: #EEEEEE; height: 100%; height: 100%">
-        <ui:include src="menuBar.xhtml"/>
+        <h:form style="height: 100%">
+         <ui:include src="menuBar.xhtml"/>
          <b:container fluid="true" style="padding-top: 1%; background-color: white; height: 100%">
             <!-- Barre latérale -->
             <b:row>
                 <b:column col-md="2">
-                    <h:form style="position: fixed; top: 15%; left:1%;">
-                            <p:menu>
-                                <p:submenu label="Ajax">
-                                    <p:menuitem value="Save" actionListener="#{menuView.save}" icon="ui-icon-disk" />
-                                    <p:menuitem value="Update" actionListener="#{menuView.update}" icon="ui-icon-arrowrefresh-1-w"/>
-                                </p:submenu>
-                                <p:submenu label="Non-Ajax">
-                                    <p:menuitem value="Delete" actionListener="#{menuView.delete}" ajax="false" icon="ui-icon-close"/>
-                                </p:submenu>
-                                <p:submenu label="Navigations">
-                                    <p:menuitem value="External" url="http://www.primefaces.org" icon="ui-icon-home"/>
-                                    <p:menuitem value="Internal" icon="ui-icon-star"/>
-                                </p:submenu>
-                            </p:menu>
-                    </h:form>
+                    
                 </b:column>
-                <b:column col-md="10">
-                    <h1 style="text-align: center">Les rencontres à venir !</h1>
-                    <p:dataTable id="rencontres" var="lig" value="#{rencontreBean.rencontresNonTermines}" 
-                                 style="width:100%; text-align: center">
-                        <p:column headerText="Date de rencontre">
-                            <h:outputText value="#{lig.dateR}" />
-                        </p:column>
+                <b:column col-md="8">
+                    <p:dataScroller value="#{panier.predictions}" var="lig">
+                        <f:facet name="header">
+                            Vos rencontres
+                        </f:facet>
 
-                        <p:column headerText="Équipe visiteur">
-                            <h:outputText value="#{lig.idVisiteur.nomE}" />
-                        </p:column>
+                        <b:row style="border-bottom: 1px solid lightgray; margin-top:5px; padding-bottom:5px; margin-left:5px; margin-right: 5px">
+                            <b:column col-md="2">
+                                <b:image value="resources/sport/#{lig.imageNum}.gif"/> 
+                            </b:column>
 
-                        <p:column headerText="Équipe locale">
-                            <h:outputText value="#{lig.idLocal.nomE}" />
-                        </p:column>
-
-                        <p:column headerText="Cote victoire locale" >
-                            <h:outputText value="#{lig.coteL}"/>
-                        </p:column>
-
-                        <p:column headerText="Cote victoire visiteur">
-                            <h:outputText value="#{lig.coteV}"/>
-                        </p:column>
-
-                        <p:column headerText="Cote match nulle">
-                            <h:outputText value="#{lig.coteD}"/>
-                        </p:column>
-
-                    </p:dataTable>
+                            <b:column col-md="6">
+                                <b:row>
+                                    <b:column col-md="5">
+                                        <h:outputText value="Date de rencontre:" />
+                                    </b:column>
+                                    <b:column col-md="6" offset-md="1">
+                                        <h:outputText value="#{lig.rencontre.dateR}" style="font-weight: bold">
+                                            <f:convertDateTime locale="fr" pattern="dd/MM/yy hh:mm" timeZone="fr" />
+                                        </h:outputText>
+                                    </b:column>
+                                </b:row>
+                                <b:row>
+                                    <b:column col-md="5">
+                                        <h:outputText value="Opposant:" />
+                                    </b:column>
+                                    <b:column col-md="6" offset-md="1">
+                                        <h:outputText value="#{lig.rencontreDescription}" style="font-weight: bold"/>
+                                    </b:column>
+                                </b:row>
+                                <b:row>
+                                    <b:column col-md="5">
+                                        <h:outputText value="Votre pronostique:" />
+                                    </b:column>
+                                    <b:column col-md="6" offset-md="1"> 
+                                        <h:outputText value="#{lig.pronostique}" style="font-weight: bold"/>
+                                    </b:column>
+                                </b:row>
+                            </b:column>
+                            <b:column col-md="2" offset-md="1" style="margin-top: 17px ">
+                                <h:outputText value="Cote : #{lig.coteSelectionnee()}"/>
+                            </b:column>
+                        </b:row>
+                    </p:dataScroller>
                 </b:column>
             </b:row>
-        </b:container>              
+            <b:row>
+                <b:column col-md="2" offset-md="5">
+                    <p:commandButton value="Valider" action="#{panier.validationPanier()}"/>
+                </b:column>
+            </b:row>
+            <b:row>
+                <b:column col-md="4" offset-md="4">
+                    <p:messages id="messages" showDetail="true" closable="true">
+                        <p:autoUpdate />
+                    </p:messages>
+                </b:column>
+            </b:row>
+        </b:container>   
+        </h:form>
     </h:body>   
 </html>
 

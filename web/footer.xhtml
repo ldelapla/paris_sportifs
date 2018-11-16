@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Facelets Template</title>
+    </h:head>
+
+    <h:body>
+
+        <ui:insert name="bottom">
+                <!-- Footer -->
+            <footer class="page-footer font-small blue pt-4" style="position: absolute; bottom: 0px; width: 100%">
+                <!-- Footer Links -->
+                <b:container fluid="true" class="text-center text-md-left">
+                  <!-- Grid row -->
+                  <b:row>
+                    <hr class="clearfix w-100 d-md-none pb-3"/>
+                    <!-- Grid column -->
+                    <b:column col-md="12">
+                      <!-- Content -->
+                      <b:image value="resources/18plus.png" />
+                      Toute personne souhaitant faire l'objet d'une interdiction
+                      de jeux doit le faire elle-même auprès du ministère de 
+                      l'intérieur. Cette interdiction est valable dans les
+                      casinos, les cercles de jeux et sur les sites de jeux 
+                      en ligne autorisés en vertu de la loi n° 2010-476 du 12 
+                      mai 2010. Elle est prononcée pour une durée de trois ans 
+                      non réductible.
+                      <br/>
+                      Attention le jeu peut créer une dépendance.
+                    </b:column>
+                    <!-- Grid column -->
+                  </b:row>
+                  <!-- Grid row -->
+                </b:container>
+                <!-- Copyright -->
+                <div class="footer-copyright text-center py-3">© 2018 Copyright:
+                    <h:link value="ParisSportif.com"/>
+                </div>
+                <!-- Copyright -->
+            </footer>
+            <!-- Footer -->
+        </ui:insert>
+
+    </h:body>
+
+</html>
