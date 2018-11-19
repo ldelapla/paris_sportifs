@@ -55,27 +55,26 @@
                                             <f:convertDateTime locale="fr" pattern="dd/MM/yy hh:mm" timeZone="fr" />
                                         </h:outputText>
                                     </p:column>
+                                                                      
+                                    <p:column headerText="Équipe locale">
+                                        <h:outputText value="#{lig.idLocal.nomE}" />
+                                    </p:column>
 
-                                    <p:column headerText="Équipe visiteur">
-                                        <h:outputText value="#{lig.idVisiteur.nomE}" />
+                                    <p:column headerText="Cote victoire locale" >
+                                        <h:outputText value="#{lig.coteL}"/>
+                                    </p:column>
+                                    
+                                    <p:column headerText="Cote match nul">
+                                        <h:outputText value="#{lig.coteD}"/>
                                     </p:column>
                                     
                                     <p:column headerText="Cote victoire visiteur">
                                         <h:outputText value="#{lig.coteV}"/>
                                     </p:column>
                                     
-                                    <p:column headerText="Cote match nulle">
-                                        <h:outputText value="#{lig.coteD}"/>
-                                    </p:column>
-
-                                    <p:column headerText="Cote victoire locale" >
-                                        <h:outputText value="#{lig.coteL}"/>
-                                    </p:column>
-
-                                    <p:column headerText="Équipe locale">
-                                        <h:outputText value="#{lig.idLocal.nomE}" />
-                                    </p:column>
-
+                                    <p:column headerText="Équipe visiteur">
+                                        <h:outputText value="#{lig.idVisiteur.nomE}" />
+                                    </p:column>                                    
                                 </p:dataTable>
 
 

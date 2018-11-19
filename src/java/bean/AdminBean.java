@@ -14,6 +14,7 @@ import dao.UtilisateurFacadeLocal;
 import entity.Equipe;
 import entity.Rencontre;
 import entity.Sport;
+import entity.Utilisateur;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -116,7 +117,6 @@ public class AdminBean implements Serializable {
     }
     
     public List<Equipe> getEquipes() {
-        System.err.println("equipe");
         return daoEquipe.findAll();
     }
 
@@ -177,6 +177,7 @@ public class AdminBean implements Serializable {
     public void createEquipe() {
         saisieEquipe.setIdS(daoSport.find(idSSaisie));
         daoEquipe.create(saisieEquipe);
+        saisieEquipe = new Equipe();
     }
     
     public void createSport() {
@@ -202,6 +203,11 @@ public class AdminBean implements Serializable {
     
     public void removeSport(){
         daoSport.remove(saisieSport);
+    }
+ 
+    public void removeEquipe(){
+        Equipe supprimeEquipe = daoEquipe.find(idESaisie);
+        daoEquipe.remove(supprimeEquipe);
     }
     
     public void changeStatut(int idRencontre){

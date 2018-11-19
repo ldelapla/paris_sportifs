@@ -78,8 +78,30 @@ import javax.ejb.EJB;
             if(rencontre.getTermine()==0){
                 nonTermines.add(rencontre);
             }
-        }
+        }  
         return nonTermines;
+    }
+
+    public List<Rencontre> getRencontresTermines(){
+        List<Rencontre> rencontres = daoRencontre.findAll();
+        List<Rencontre> termines = new ArrayList<Rencontre>(); 
+        for (Rencontre rencontre : rencontres){
+            if(rencontre.getTermine()==1){
+                termines.add(rencontre);
+            }
+        }  
+        return termines;
+    }
+    
+    public List<Rencontre> getTypeRencontresTerminees(){
+        List<Rencontre> rencontres = daoRencontre.findAll();
+        List<Rencontre> termines = new ArrayList<Rencontre>(); 
+        for (Rencontre rencontre : rencontres){
+            if(rencontre.getTermine()==1 && rencontre.getIdVisiteur().getIdS().equals(this.sportSelected)){
+                termines.add(rencontre);
+            }
+        }      
+        return termines;
     }
     
     public List<Rencontre> getSportRencontreNonTermines(){
@@ -98,6 +120,14 @@ import javax.ejb.EJB;
             return getSportRencontreNonTermines();
         }else {
             return getRencontresNonTermines();
+        }
+    }
+
+    public List<Rencontre> getWantedRencontreTerminees(){
+        if (selective){
+            return getTypeRencontresTerminees();
+        }else {
+            return getRencontresTermines();
         }
     }
 }

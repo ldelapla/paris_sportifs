@@ -6,10 +6,12 @@
 package bean;
 
 import dao.UtilisateurFacadeLocal;
+import entity.Rencontre;
 import entity.Utilisateur;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -68,7 +70,9 @@ private boolean connecte;
         this.sMdp = sMdp;
     }
     
-    
+    public List<Utilisateur> getAllUser(){
+        return daoUser.findAll();
+    }
     
     public String tryConnect (){
         utilisateur = daoUser.find(sLogin);

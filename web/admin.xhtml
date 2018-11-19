@@ -9,54 +9,80 @@
       style="height: 100%; width: 100%;">
     <h:head>
         <title>Facelet Title</title>
-        <h:outputStylesheet name="./css/default.css"/>
-        <h:outputStylesheet name="./css/cssLayout.css"/>
-        
         
     </h:head>
-    <h:body style="background-color: #EEEEEE; height: 100%; height: 100%">
+    <h:body style="background-color: #EEEEEE; height: 100%">
         <ui:include src="menuBar.xhtml"/>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
-         <b:container fluid="true" style="padding-top: 1%; background-color: white; height: 100%">
+        <b:container fluid="true" style="padding-top: 1%; background-color: white; height: 100%">
             <!-- Barre latérale -->
             <b:row>
                 <b:column col-md="2">
-                    <h:form style="position: fixed; top: 50%; left:1%;">
+                    <h:form style="position: fixed; top: 38%; left:1%;">
                             <p:menu>
-                                <p:menuitem value="Compte" actionListener="#{menuView.save}" icon="ui-icon-home" />
+                                <p:menuitem value="Accueil" outcome="admin.xhtml" icon="ui-icon-home" />
+                            <p:submenu label="Gestion des Matchs">
                                 <p:menuitem value="Ajouter match" outcome="saisieMatch.xhtml" icon="ui-icon-plus"/>
                                 <p:menuitem value="Valider match" outcome="validerMatch.xhtml" icon="ui-icon-check"/>
-                                <p:menuitem value="Historique" outcome="paris.xhtml" icon=" ui-icon-folder-collapsed"/>
+                            </p:submenu>
+                            <p:submenu label="Gestion de l'historique">    
+                                <p:menuitem value="Historique des Matchs" outcome="paris.xhtml" icon=" ui-icon-folder-collapsed"/>                            
+                            </p:submenu>
                             </p:menu>
                     </h:form>
                 </b:column>
-                <b:column col-md="10">
-                    <h1 style="text-align: center">Les rencontres admin !</h1>
-                        <p:dataTable id="rencontres" var="lig" value="#{rencontreBean.rencontresNonTermines}" 
-                                     style="width:100%; text-align: center">
-                            <p:column headerText="Date de rencontre">
-                                <h:outputText value="#{lig.dateR}" />
-                            </p:column>
+                <b:column col-md="8">
+                    <b:row>
+                        <b:column col-md="12">
+                            <h1 style="text-align: center">Bienvenue sur la page admin</h1>
+                        </b:column>
+                    </b:row>
 
-                            <p:column headerText="Équipe visiteur">
-                                <h:outputText value="#{lig.idVisiteur.nomE}" />
-                            </p:column>
-
-                            <p:column headerText="Équipe locale">
-                                <h:outputText value="#{lig.idLocal.nomE}" />
-                            </p:column>
-
-                            <p:column headerText="Cote victoire locale" >
-                                <h:outputText value="#{lig.coteL}"/>
-                            </p:column>
-
-                            <p:column headerText="Cote victoire visiteur">
-                                <h:outputText value="#{lig.coteV}"/>
-                            </p:column>
-
-                        </p:dataTable>
-                    </b:column>
+                    <b:row style="margin-top: 20px;">
+                        <b:column col-md="6">
+                            <b:row>
+                                <b:column col-md="12">
+                                    <h:form>    
+                                        <p:selectOneMenu id="suppEquipe" value="#{adminBean.idESaisie}">
+                                            <f:selectItems var="equ" value="#{adminBean.equipes}" itemLabel="#{equ.nomE}" itemValue="#{equ.idE}"  />
+                                        </p:selectOneMenu>
+                                        <p:commandButton value="Supprimer" actionListener="#{adminBean.removeEquipe()}" ajax="false"/>
+                                    </h:form>                    
+                                </b:column>
+                            </b:row> 
+                            <b:row>
+                                <h:form>
+                                    <b:column col-md="12">
+                                        <h:panelGrid id="grid" columns="3" cellpadding="5">
+                                            <p:outputLabel value="Votre sport : " />
+                                            <p:selectOneMenu id="sportMenu" value="#{adminBean.idSSaisie}">
+                                                <f:selectItems var="sport" value="#{adminBean.sports}" itemLabel="#{sport.nomSport}" itemValue="#{sport.idS}"  />
+                                            </p:selectOneMenu>
+                                            <br />
+                                            <p:outputLabel value="nom de l'équipe : " />
+                                            <p:inputText id="nomEquipe" value="#{adminBean.saisieEquipe.nomE}"/>
+                                            <br />
+                                            <p:commandButton value="valider" actionListener="#{adminBean.createEquipe()}" ajax="false"/>
+                                        </h:panelGrid>  
+                                    </b:column>
+                                </h:form>
+                            </b:row>
+                        </b:column>
+                        <b:column col-md="6">
+                            <h:form>
+                                <p:dataTable id="table" var="lig" value="#{adminBean.equipes}" style="width:100%">
+                                    <p:column headerText="nom équipe">
+                                        <h:outputText value="#{lig.nomE}" />
+                                    </p:column>
+                                    <p:column headerText="nomSport">
+                                        <h:outputText value="#{lig.idS.nomSport}" />
+                                    </p:column>
+                                </p:dataTable>
+                            </h:form>
+                        </b:column>
+                    </b:row>
+                </b:column>
             </b:row>
-        </b:container>              
+        </b:container>   
     </h:body>   
 </html>
 
