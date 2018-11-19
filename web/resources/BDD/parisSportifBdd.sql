@@ -154,8 +154,11 @@ insert into Utilisateur values
     ('afousse', 'afousse', 'Fousse', 'Allan', 0, 100.58);
 
 insert into Rencontre(dateR, termine, coteV, coteD, coteL, idVisiteur, idLocal) values
-   ('2018-04-11 10:58:00', 1, 3.40, 1.2, 1.1, 1, 3),
-   ('2018-12-11 10:58:00', 0, 3.40, 1.2, 1.1, 6, 4);
+   ('2018-04-11 10:58:00', 1, 1.4, 1.2, 1.5, 1, 3),
+   ('2018-12-11 10:58:00', 0, 2.4, 1.2, 1.7, 6, 4),
+   ('2018-12-15 10:58:00', 0, 0.4, 1.2, 1.9, 2, 3),
+   ('2018-12-10 10:58:00', 0, 0.8, 1.2, 1.95, 3, 1),
+   ('2018-12-16 10:58:00', 0, 1.2, 1.2, 1.1, 5, 4);
 
 insert into Paris(mise, nomCompte) values
     (10, 'fenfut'),

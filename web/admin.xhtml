@@ -12,7 +12,9 @@
         
     </h:head>
     <h:body style="background-color: #EEEEEE; height: 100%">
-        <ui:include src="menuBar.xhtml"/>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+        <h:form>
+            <ui:include src="menuBar.xhtml"/>     
+        </h:form>
         <b:container fluid="true" style="padding-top: 1%; background-color: white; height: 100%">
             <!-- Barre latérale -->
             <b:row>
@@ -41,31 +43,53 @@
                         <b:column col-md="6">
                             <b:row>
                                 <b:column col-md="12">
-                                    <h:form>    
-                                        <p:selectOneMenu id="suppEquipe" value="#{adminBean.idESaisie}">
-                                            <f:selectItems var="equ" value="#{adminBean.equipes}" itemLabel="#{equ.nomE}" itemValue="#{equ.idE}"  />
-                                        </p:selectOneMenu>
-                                        <p:commandButton value="Supprimer" actionListener="#{adminBean.removeEquipe()}" ajax="false"/>
-                                    </h:form>                    
+                                    <b:row>
+                                        <b:column col-md="6">
+                                            <h3>Supprimer une équipe :</h3>
+                                        </b:column>
+                                    </b:row>
+                                    <b:row style="margin:20px;">
+                                        <h:form>
+                                            <b:column col-md="4">
+                                                <p:selectOneMenu value="#{adminBean.idESaisie}">
+                                                    <f:selectItems var="equ" value="#{adminBean.equipes}" itemLabel="#{equ.nomE}" itemValue="#{equ.idE}"  />
+                                                </p:selectOneMenu>
+                                            </b:column>
+                                            <b:column col-md="4" offset-md="4">
+                                                <p:commandButton value="Supprimer" actionListener="#{adminBean.removeEquipe()}" ajax="false"/>
+                                            </b:column>
+                                        </h:form>   
+                                    </b:row>
                                 </b:column>
                             </b:row> 
                             <b:row>
-                                <h:form>
-                                    <b:column col-md="12">
-                                        <h:panelGrid id="grid" columns="3" cellpadding="5">
-                                            <p:outputLabel value="Votre sport : " />
+                                <b:column col-md="12">
+                                    <h3>Ajouter une équipe :</h3>
+                                </b:column>
+                            </b:row> 
+                            <h:form>
+                                <b:row style="margin:20px;">
+                                    <b:column col-md="4">
+                                        Votre sport :
+                                    </b:column>
+                                    <b:column col-md='4'>
                                             <p:selectOneMenu id="sportMenu" value="#{adminBean.idSSaisie}">
                                                 <f:selectItems var="sport" value="#{adminBean.sports}" itemLabel="#{sport.nomSport}" itemValue="#{sport.idS}"  />
                                             </p:selectOneMenu>
-                                            <br />
-                                            <p:outputLabel value="nom de l'équipe : " />
-                                            <p:inputText id="nomEquipe" value="#{adminBean.saisieEquipe.nomE}"/>
-                                            <br />
-                                            <p:commandButton value="valider" actionListener="#{adminBean.createEquipe()}" ajax="false"/>
-                                        </h:panelGrid>  
                                     </b:column>
-                                </h:form>
-                            </b:row>
+                                </b:row>
+                                <b:row>
+                                    <b:column col-md='3'>
+                                        Nom de l'équipe : 
+                                    </b:column>
+                                    <b:column col-md="3" offset-md="1" >
+                                        <p:inputText id="nomEquipe" value="#{adminBean.saisieEquipe.nomE}" style="width: 100%;"/>
+                                    </b:column>
+                                    <b:column col-md="3" offset-md="2">
+                                            <p:commandButton value="valider" actionListener="#{adminBean.createEquipe()}" ajax="false"/>
+                                    </b:column>
+                                </b:row>
+                            </h:form>
                         </b:column>
                         <b:column col-md="6">
                             <h:form>
