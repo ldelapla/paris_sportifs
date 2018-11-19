@@ -41,8 +41,6 @@ public class AdminBean implements Serializable {
     SportFacadeLocal daoSport;
     @EJB
     RencontreFacadeLocal daoRencontre;
-    @EJB
-    PredictionFacadeLocal daoPrediction;
     @EJB 
     ParisFacadeLocal daoParis;
     

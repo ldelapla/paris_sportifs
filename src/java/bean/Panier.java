@@ -9,6 +9,7 @@ import dao.ParisFacadeLocal;
 import dao.PredictionFacadeLocal;
 import dao.RencontreFacadeLocal;
 import dao.UtilisateurFacade;
+import dao.UtilisateurFacadeLocal;
 import entity.Rencontre;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import entity.Paris;
 import entity.Prediction;
+import entity.Utilisateur;
 
 /**
  *
@@ -40,16 +42,34 @@ public class Panier implements Serializable {
     @EJB
     PredictionFacadeLocal daoPrediction;
     @EJB
-    UtilisateurFacade daoUser;
+    UtilisateurFacadeLocal daoUtilis;
     
     private Paris paris;
     private ArrayList<Prediction> predictions;
-    private int mise;
+    private float mise;
     
     public Panier() {
         paris = new Paris();
         predictions = new ArrayList<>();
     }
+
+    public ArrayList<Prediction> getPredictions() {
+        return predictions;
+    }
+
+    public void setPredictions(ArrayList<Prediction> predictions) {
+        this.predictions = predictions;
+    }
+
+    public float getMise() {
+        return mise;
+    }
+
+    public void setMise(float mise) {
+        this.mise = mise;
+    }
+    
+    
     
     /**
      * 
@@ -69,8 +89,13 @@ public class Panier implements Serializable {
         } else {
             prediction = "victoire " + rencontrePredite.getIdLocal().getNomE();
         }
+        
+        
+        int nbParis = daoParis.count();
+        nbParis ++;
+        paris.setIdP(nbParis);
 
-        maPrediction = new Prediction(rencontrePredite.getIdR(), this.paris.getIdP());
+        maPrediction = new Prediction(rencontrePredite.getIdR(), paris.getIdP());
         maPrediction.setRencontre(rencontrePredite);
         maPrediction.setParis(paris);
         maPrediction.setChoix(choix);
@@ -89,23 +114,40 @@ public class Panier implements Serializable {
                         "Ajout", message));
     }
     
-    public void validationPanier (String nomCompte){
-        String message = "Votre paris est bien ajouté !";
-        paris.setNomCompte(this.daoUser.find(nomCompte));
-        paris.setMise(mise);
-        paris.setPredictionCollection(predictions);
+    public void validationPanier (Utilisateur utilisateur){
+        String message;
         
-        for (Prediction prediction : predictions){
-            daoPrediction.create(prediction);
-        }
+        if (mise > utilisateur.getSolde()){
+            message = "Vous n'avez pas assez d'argent !";
+            FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                        "Erreur", message));
         
-        daoParis.create(paris);
+        } else {
+            message = "Votre paris est bien ajouté !";
+            paris.setNomCompte(utilisateur);
+            paris.setMise(mise);
+            paris.setPredictionCollection(predictions);
+            daoParis.create(paris);
         
+        this.paris = new Paris();
+        this.predictions = new ArrayList<>();
+        
+        utilisateur.paieSolde(mise);
+        daoUtilis.edit(utilisateur);
         
         FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_INFO,
                         "Ajout", message));
-        
+        }
+    }
+    
+    public boolean getPredictionEmpty (){
+        return this.predictions.isEmpty();
+    }
+    
+    public void viderPanier(){
+        this.mise=0;
         this.paris = new Paris();
         this.predictions = new ArrayList<>();
     }
