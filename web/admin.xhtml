@@ -32,7 +32,7 @@
                             </p:menu>
                     </h:form>
                 </b:column>
-                <b:column col-md="8">
+                <b:column col-md="9">
                     <b:row>
                         <b:column col-md="12">
                             <h1 style="text-align: center">Bienvenue sur la page admin</h1>
@@ -44,7 +44,7 @@
                             <b:row>
                                 <b:column col-md="12">
                                     <b:row>
-                                        <b:column col-md="6">
+                                        <b:column col-md="8">
                                             <h3>Supprimer une équipe :</h3>
                                         </b:column>
                                     </b:row>
@@ -88,6 +88,11 @@
                                     <b:column col-md="3" offset-md="2">
                                             <p:commandButton value="valider" actionListener="#{adminBean.createEquipe()}" ajax="false"/>
                                     </b:column>
+                                    <b:column col-md="12">
+                                        <p:messages id="messages" showDetail="true" closable="true">
+                                            <p:autoUpdate />
+                                        </p:messages>
+                                    </b:column>    
                                 </b:row>
                             </h:form>
                         </b:column>

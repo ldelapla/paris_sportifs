@@ -173,8 +173,16 @@ public class AdminBean implements Serializable {
     }     
     
     public void createEquipe() {
+        String message;
         saisieEquipe.setIdS(daoSport.find(idSSaisie));
         daoEquipe.create(saisieEquipe);
+                
+        message = "L'équipe " + saisieEquipe.getNomE() + " à bien été ajoutée";
+        
+        FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage(FacesMessage.SEVERITY_INFO,
+                        "Ajout ! ", message));
+        
         saisieEquipe = new Equipe();
     }
     
@@ -204,7 +212,15 @@ public class AdminBean implements Serializable {
     }
  
     public void removeEquipe(){
+        String message;
         Equipe supprimeEquipe = daoEquipe.find(idESaisie);
+        message = "L'équipe " + supprimeEquipe.getNomE() + " à bien été supprimée";
+        
+        FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage(FacesMessage.SEVERITY_INFO,
+                        "Suppression ! ", message));
+        
+        saisieEquipe = new Equipe();
         daoEquipe.remove(supprimeEquipe);
     }
     
