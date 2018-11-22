@@ -8,8 +8,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       style="height: 100%; width: 100%;">
     <h:head>
-        <title>Facelet Title</title>
-        
+        <title>Facelet Title</title>       
     </h:head>
     <h:body style="background-color: #EEEEEE; height: 100%">
         <ui:include src="menuBar.xhtml"/>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
@@ -50,7 +49,7 @@
             </b:row>
                 <b:row>
                     <b:column col-md="8" offset="3">
-                        <p:dataTable id="rencontreEnCours" var="lig" value="#{rencontreBean.wantedRencontreTerminees}" style="width:100%; text-align: center">
+                        <p:dataTable id="rencontreEnCours" var="lig" value="#{rencontreBean.wantedRencontreTerminees}" rows="8" paginator="true" rowsPerPageTemplate="4,8,12" style="width:100%; text-align: center">
                             <p:column headerText="Date de rencontre">
                                 <h:outputText value="#{lig.dateR}" />
                             </p:column>

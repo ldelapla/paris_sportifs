@@ -74,19 +74,19 @@
                             </b:row><br />                
                         <b:row>  
                             <b:column col-md="3">
-                            <b:inputText value="#{adminBean.saisieRencontre.coteV}" />
+                            <p:spinner id="cote1" value="#{adminBean.saisieRencontre.coteV}" stepFactor="0.1" />
                             </b:column>
                             <b:column col-md="3">
-                            <b:inputText value="#{adminBean.saisieRencontre.coteD}" />
+                            <p:spinner id="cote2" value="#{adminBean.saisieRencontre.coteD}" stepFactor="0.1" />
                             </b:column>
                             <b:column col-md="3">
-                            <b:inputText value="#{adminBean.saisieRencontre.coteL}" />
+                            <p:spinner id="cote3" value="#{adminBean.saisieRencontre.coteL}" stepFactor="0.1" />
                             </b:column>
                             <b:column col-md="3">
                                 <p:calendar id="datetime" value="#{adminBean.dateRencontre}" pattern="MM/dd/yyyy HH:mm:ss" />
                             </b:column>                            
                         </b:row>
-                        <b:row style="text-align: center">  
+                        <b:row style="text-align: center; margin-top: 15px">  
                             <p:commandButton value="valider" action="#{adminBean.createRencontre()}" update="@form"/>
                         </b:row>
                         </p:fieldset>    
@@ -136,19 +136,19 @@
                             </b:row><br />                
                         <b:row>  
                             <b:column col-md="3">
-                            <b:inputText value="#{adminBean.saisieRencontre.coteV}" />
+                            <p:spinner id="cote1" value="#{adminBean.saisieRencontre.coteV}" stepFactor="0.1" />
                             </b:column>
                             <b:column col-md="3">
-                            <b:inputText value="#{adminBean.saisieRencontre.coteD}" />
+                            <p:spinner id="cote2" value="#{adminBean.saisieRencontre.coteD}" stepFactor="0.1" />
                             </b:column>
                             <b:column col-md="3">
-                            <b:inputText value="#{adminBean.saisieRencontre.coteL}" />
+                            <p:spinner id="cote3" value="#{adminBean.saisieRencontre.coteL}" stepFactor="0.1" />
                             </b:column>
                             <b:column col-md="3">
                                 <p:calendar id="datetime" value="#{adminBean.dateRencontre}" pattern="MM/dd/yyyy HH:mm:ss" />
                             </b:column>
                         </b:row>
-                        <b:row style="text-align: center">  
+                        <b:row style="text-align: center; margin-top: 15px">  
                             <p:commandButton value="valider" action="#{adminBean.createRencontre()}" update="@form"/>
                         </b:row>
                         </p:fieldset>
